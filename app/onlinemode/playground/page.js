@@ -159,10 +159,10 @@ export default function Page() {
             }
         }
     }, [nVal]);
+    useEffect(()=>{
     if (!myId) {
         router.push("/onlinemode");
-    }
-    useEffect(() => {}, [scoreboard]);
+    }},[router])
     const handleLeave = () => {
         socket.emit("leavegame", roomPassword);
         alertToast.current = toast.success("Left the game!");
