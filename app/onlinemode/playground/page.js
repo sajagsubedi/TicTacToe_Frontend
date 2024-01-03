@@ -140,7 +140,7 @@ export default function Page() {
             alertToast.current = toast.error("Opponent left the game!");
             router.push("/onlinemode");
         });
-    }, []);
+    }, [router,myId]);
     useEffect(() => {
         if (isGame !== "") {
             if (isGame == users[0].weapon) {
@@ -171,7 +171,7 @@ export default function Page() {
     if (!opponentConnection) {
         return (
             <main className="w-full bg-gray-900 h-screen flex flex-col items-center font-sans py-5">
-            <div className=" text-white bg-stone-950 p-5 h-16 rouded shadow">
+            <div className="text-white bg-stone-950 p-5 h-24 rouded shadow text-base">
             Waiting for Opponent to Join
             <Spinner/>
             </div>

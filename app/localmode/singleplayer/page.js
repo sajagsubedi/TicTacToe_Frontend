@@ -83,7 +83,7 @@ export default function Page() {
         msg: `${isGame == myWeapon ? "You" : "Computer"} won the game`,
       });
     }
-  }, [isGame]);
+  }, [isGame,myWeapon]);
 
   const computerPlay = () => {
     let possibilities = [
@@ -160,7 +160,7 @@ export default function Page() {
       setGmData(newGmData);
       checkIsGame(newGmData);
     }
-  }, [myTurn]);
+  }, [myTurn,myWeapon,gmData,computerPlay]);
 
   useEffect(() => {
     if (nVal == gmData.length) {
@@ -168,7 +168,7 @@ export default function Page() {
         setAlertSt({ msg: "That,s a tie!" });
       }
     }
-  }, [nVal]);
+  }, [nVal,gmData.length,isGame]);
 
   useEffect(() => {
     setIsclient(true);

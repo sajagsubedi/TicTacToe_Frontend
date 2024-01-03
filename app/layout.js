@@ -19,8 +19,6 @@ export default function RootLayout({ children }) {
             autoClose={3000}
             style={{ width: "230px" }}
           />
-          <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
         </main>
       </body>
     </html>

@@ -88,13 +88,13 @@ export default function Page() {
             socket.off("roomFull");
             socket.off("roomNotFound");
         };
-    }, []);
+    }, [dispatch]);
     
     useEffect(() => {
         if (myId !== "" && router.pathname !== "onlinemode/playground") {
             router.push("onlinemode/playground");
         }
-    }, [myId == ""]);
+    }, [myId,router]);
 
     return (
         <main className="flex flex-col items-center py-5 px-3">

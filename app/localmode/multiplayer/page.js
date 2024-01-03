@@ -86,7 +86,7 @@ export default function Page() {
         setAlertSt({ msg: "That,s a tie!" });
       }
     }
-  }, [nVal]);
+  }, [nVal,gmData.length,isGame]);
   useEffect(() => {
     setIsclient(true);
   }, []);
