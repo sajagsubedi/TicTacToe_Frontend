@@ -89,7 +89,6 @@ export default function Page() {
                 setGmData([...newArr]);
                 checkIsGame([...newArr]);
                 setIsmyTurn(false);
-                setNVal(p => p + 1);
                 socket.emit("moved", {
                     myId,
                     roomPassword,
@@ -102,6 +101,7 @@ export default function Page() {
     const restartGame = () => {
         socket.emit("restart", { roomPassword, myId, myTurn });
     };
+    
     const setRestart = data => {
         setAlertSt({ msg: "" });
         setGmData([...defaultGmData]);
@@ -115,6 +115,7 @@ export default function Page() {
             setIsmyTurn(false);
         }
     };
+    
     useEffect(() => {
         setIsclient(true);
         socket.on("opponentJoined", players => {
@@ -126,14 +127,7 @@ export default function Page() {
                 setGmData(data.gmData);
                 setIsmyTurn(true);
                 checkIsGame(data.gmData);
-                let cNv = 0;
-                for (let i = 0; i < gmData.length; i++) {
-                    if (gmData[i] !== "") {
-                        cNv++;
-                    }
-                }
-                setNVal(cNv);
-            }
+               }
         });
         socket.on("restart", setRestart);
         socket.on("opponentLeft", () => {
@@ -141,6 +135,7 @@ export default function Page() {
             router.push("/onlinemode");
         });
     }, [router,myId]);
+    
     useEffect(() => {
         if (isGame !== "") {
             if (isGame == users[0].weapon) {
@@ -160,9 +155,20 @@ export default function Page() {
         }
     }, [nVal]);
     useEffect(()=>{
+       let cNv = 0;
+                for (let i = 0; i < gmData.length; i++) {
+                    if (gmData[i] !== "") {
+                        cNv++;
+                    }
+                }
+                setNVal(cNv);
+            
+    },[gmData])
+    useEffect(()=>{
     if (!myId) {
         router.push("/onlinemode");
-    }},[router])
+    }},[router,myId])
+    
     const handleLeave = () => {
         socket.emit("leavegame", roomPassword);
         alertToast.current = toast.success("Left the game!");
